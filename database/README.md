@@ -9,7 +9,7 @@ Os scripts seguem um padrão sequencial para facilitar a execução e controle d
 Exemplo:
 0001_create_table_pessoa.sql
 0002_create_table_categoria.sql
-0003_insert_categorias_iniciais.sql
+0003_create_table_transacao.sql
 
 ## Objetivo
 
