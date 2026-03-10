@@ -1,4 +1,5 @@
-﻿using GastosResidenciais.Application.Interfaces;
+﻿using GastosResidenciais.Application.Enums;
+using GastosResidenciais.Application.Interfaces;
 using GastosResidenciais.Application.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -29,13 +30,13 @@ namespace GastosResidenciais.API.Controllers
             var result = _pessoaService.GetById(id);
 
             if (!result.IsSuccess)
-                return NotFound(result.Messages);
+                return NotFound(result);
 
             return Ok(result);
         }
 
         [HttpPost]
-        public IActionResult Create(CreatePessoaViewModel model)
+        public IActionResult Create(PessoaCreateViewModel model)
         {
             var result = _pessoaService.Create(model);
 
@@ -46,12 +47,20 @@ namespace GastosResidenciais.API.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult Update(int id, UpdatePessoaViewModel model)
+        public IActionResult Update(int id, PessoaUpdateViewModel model)
         {
             var result = _pessoaService.Update(id, model);
 
             if (!result.IsSuccess)
-                return NotFound();
+            {
+                switch (result.ErrorType)
+                {
+                    case ErrorType.NotFound:
+                        return NotFound(result);
+                    case ErrorType.Validation:
+                        return BadRequest(result);
+                }
+            }
 
             return NoContent();
         }
@@ -61,8 +70,13 @@ namespace GastosResidenciais.API.Controllers
         {
             var result = _pessoaService.Delete(id);
 
-            if(!result.IsSuccess)
-                return NotFound();
+            switch (result.ErrorType)
+            {
+                case ErrorType.NotFound:
+                    return NotFound(result);
+                case ErrorType.Validation:
+                    return BadRequest(result);
+            }
 
             return NoContent();
         }

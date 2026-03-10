@@ -6,8 +6,8 @@ namespace GastosResidenciais.Application.Interfaces
     {
         ResultViewModel<List<PessoaViewModel>> GetAll();
         ResultViewModel<PessoaViewModel?> GetById(int id);
-        ResultViewModel<PessoaViewModel> Create(CreatePessoaViewModel model);
-        ResultViewModel Update(int id, UpdatePessoaViewModel model);
+        ResultViewModel<PessoaViewModel> Create(PessoaCreateViewModel model);
+        ResultViewModel Update(int id, PessoaUpdateViewModel model);
         ResultViewModel Delete(int id);
     }
 }

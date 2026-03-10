@@ -2,17 +2,17 @@
 
 namespace GastosResidenciais.Application.Models
 {
-    public class UpdatePessoaViewModel
+    public class PessoaCreateViewModel
     {
         public string Nome { get; set; } = string.Empty;
         public int Idade { get; set; }
 
-        public static Pessoa ToEntity(UpdatePessoaViewModel model)
+        public Pessoa ToEntity()
         {
-            return new Pessoa()
+            return new Pessoa
             {
-                Nome = model.Nome,
-                Idade = model.Idade
+                Nome = Nome,
+                Idade = Idade
             };
         }
     }
