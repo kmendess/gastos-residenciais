@@ -1,4 +1,5 @@
-﻿using GastosResidenciais.Application.Interfaces;
+﻿using GastosResidenciais.Application.Enums;
+using GastosResidenciais.Application.Interfaces;
 using GastosResidenciais.Application.Models;
 using GastosResidenciais.Domain.Repositories;
 
@@ -27,7 +28,7 @@ namespace GastosResidenciais.Application.Services
             var pessoa = _pessoaRepository.GetById(id);
 
             if (pessoa == null)
-                return ResultViewModel<PessoaViewModel?>.Error("Pessoa não encontrada");
+                return ResultViewModel<PessoaViewModel?>.Error(ErrorType.NotFound, "Pessoa não encontrada.");
 
             return ResultViewModel<PessoaViewModel?>.Success(PessoaViewModel.FromEntity(pessoa));
         }
@@ -44,7 +45,7 @@ namespace GastosResidenciais.Application.Services
             var pessoa = _pessoaRepository.GetById(id);
 
             if (pessoa == null)
-                return ResultViewModel.Error("Pessoa não encontrada");
+                return ResultViewModel.Error(ErrorType.NotFound, "Pessoa não encontrada.");
 
             pessoa.Nome = model.Nome;
             pessoa.Idade = model.Idade;
@@ -59,7 +60,7 @@ namespace GastosResidenciais.Application.Services
             var pessoa = _pessoaRepository.GetById(id);
 
             if (pessoa == null)
-                return ResultViewModel.Error("Pessoa não encontrada");
+                return ResultViewModel.Error(ErrorType.NotFound, "Pessoa não encontrada");
 
             _pessoaRepository.Delete(pessoa);
 

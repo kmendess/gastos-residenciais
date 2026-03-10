@@ -1,7 +1,6 @@
 ﻿using GastosResidenciais.Application.Interfaces;
 using GastosResidenciais.Application.Models;
 using Microsoft.AspNetCore.Mvc;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace GastosResidenciais.API.Controllers
 {
@@ -30,7 +29,7 @@ namespace GastosResidenciais.API.Controllers
             var result = _pessoaService.GetById(id);
 
             if (!result.IsSuccess)
-                return NotFound(result.Message);
+                return NotFound(result.Messages);
 
             return Ok(result);
         }
@@ -39,6 +38,9 @@ namespace GastosResidenciais.API.Controllers
         public IActionResult Create(CreatePessoaViewModel model)
         {
             var result = _pessoaService.Create(model);
+
+            if (!result.IsSuccess)
+                return BadRequest(result);
 
             return CreatedAtAction(nameof(GetById), new { result.Data?.Id }, result.Data);
         }
