@@ -24,7 +24,7 @@ RUN dotnet restore "GastosResidenciais.API/GastosResidenciais.API.csproj"
 COPY . .
 
 # Entra na pasta do projeto
-WORKDIR "/src/GastosResidenciais.API"
+WORKDIR "/src/GastosResidenciais/GastosResidenciais.API"
 
 # Build
 RUN dotnet build "GastosResidenciais.API.csproj" -c Release -o /app/build
