@@ -15,7 +15,7 @@ WORKDIR /src
 COPY ["GastosResidenciais/GastosResidenciais.API/GastosResidenciais.API.csproj", "GastosResidenciais.API/"]
 
 # Restore das dependências
-RUN dotnet restore "GastosResidenciais/GastosResidenciais.API/GastosResidenciais.API.csproj"
+RUN dotnet restore "GastosResidenciais.API/GastosResidenciais.API.csproj"
 
 # Copia o restante do código
 COPY . .
