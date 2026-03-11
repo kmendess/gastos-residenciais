@@ -13,6 +13,9 @@ WORKDIR /src
 
 # Copia apenas os arquivos de projeto primeiro (melhora cache)
 COPY ["GastosResidenciais/GastosResidenciais.API/GastosResidenciais.API.csproj", "GastosResidenciais.API/"]
+COPY ["GastosResidenciais/GastosResidenciais.Application/GastosResidenciais.Application.csproj", "GastosResidenciais.Application/"]
+COPY ["GastosResidenciais/GastosResidenciais.Domain/GastosResidenciais.Domain.csproj", "GastosResidenciais.Domain/"]
+COPY ["GastosResidenciais/GastosResidenciais.Infrastructure/GastosResidenciais.Infrastructure.csproj", "GastosResidenciais.Infrastructure/"]
 
 # Restore das dependências
 RUN dotnet restore "GastosResidenciais.API/GastosResidenciais.API.csproj"
