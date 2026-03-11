@@ -14,14 +14,27 @@ namespace GastosResidenciais.Infrastructure.Configurations
 
             builder.Property(p => p.Id)
                 .HasColumnName("id");
+            
+            builder.HasOne(p => p.Pessoa)
+                .WithMany(p => p.Transacoes)
+                .HasForeignKey(p => p.PessoaId)
+                .OnDelete(DeleteBehavior.Cascade);
 
             builder.Property(p => p.PessoaId)
                 .HasColumnName("pessoa_id")
                 .IsRequired();
 
+            builder.Property(p => p.Tipo)
+                .HasColumnName("tipo")
+                .IsRequired();
+
             builder.Property(p => p.CategoriaId)
                 .HasColumnName("categoria_id")
                 .IsRequired();
+
+            builder.HasOne(p => p.Categoria)
+                .WithMany()
+                .HasForeignKey(p => p.CategoriaId);
 
             builder.Property(p => p.Descricao)
                 .HasColumnName("descricao")
@@ -30,20 +43,8 @@ namespace GastosResidenciais.Infrastructure.Configurations
 
             builder.Property(p => p.Valor)
                 .HasColumnName("valor")
+                .HasPrecision(15, 2)
                 .IsRequired();
-
-            builder.Property(p => p.Tipo)
-                .HasColumnName("tipo")
-                .IsRequired();
-
-            builder.HasOne(p => p.Pessoa)
-                .WithMany(p => p.Transacoes)
-                .HasForeignKey(p => p.PessoaId)
-                .OnDelete(DeleteBehavior.Cascade);
-
-            builder.HasOne(p => p.Categoria)
-                .WithMany()
-                .HasForeignKey(p => p.CategoriaId);
 
             builder.Property(p => p.CriadoEm)
                 .HasColumnName("criado_em")
