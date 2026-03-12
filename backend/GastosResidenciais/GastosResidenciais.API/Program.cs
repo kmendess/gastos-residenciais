@@ -24,8 +24,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy("AllowReactApp", policy =>
     {
         policy
-            //.WithOrigins("http://localhost:5173")
-            .WithOrigins("https://gastos-residenciais-api.onrender.com")
+            .WithOrigins("http://localhost:5173", "https://gastos-residenciais-api.onrender.com")
             .AllowAnyHeader()
             .AllowAnyMethod();
     });
