@@ -6,7 +6,7 @@ namespace GastosResidenciais.Application.Models
     {
         public int Id { get; set; }
         public PessoaViewModel Pessoa { get; set; } = null!;
-        public int Tipo { get; set; }
+        public EnumViewModel Tipo { get; set; } = null!;
         public CategoriaViewModel Categoria { get; set; } = null!;
         public string Descricao { get; set; } = string.Empty;
         public decimal Valor { get; set; }
@@ -16,17 +16,26 @@ namespace GastosResidenciais.Application.Models
             return new TransacaoViewModel
             {
                 Id = entity.Id,
-                Pessoa = new PessoaViewModel() { 
-                    Id= entity.Pessoa.Id,
+                Pessoa = new PessoaViewModel()
+                {
+                    Id = entity.Pessoa.Id,
                     Nome = entity.Pessoa.Nome,
                     Idade = entity.Pessoa.Idade,
                 },
-                Tipo = (int)entity.Tipo,
+                Tipo = new EnumViewModel()
+                {
+                    Id = (int)entity.Tipo,
+                    Descricao = entity.Tipo.ToString()
+                },
                 Categoria = new CategoriaViewModel()
                 {
-                    Id= entity.Categoria.Id,
+                    Id = entity.Categoria.Id,
                     Descricao = entity.Categoria.Descricao,
-                    Finalidade = (int)entity.Categoria.Finalidade
+                    Finalidade = new EnumViewModel()
+                    {
+                        Id = (int)entity.Categoria.Finalidade,
+                        Descricao = entity.Categoria.Finalidade.ToString()
+                    }
                 },
                 Descricao = entity.Descricao,
                 Valor = entity.Valor
